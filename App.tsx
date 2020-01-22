@@ -1,68 +1,86 @@
-import React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import * as React from 'react';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Sharing from 'expo-sharing';
 import uploadToAnonymousFilesAsync from 'anonymous-files';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator, NavigationStackProp } from 'react-navigation-stack';
 
-export default function App() {
-  let [selectedImage, setSelectedImage] = React.useState(null);
+type Props = {
+  navigation: NavigationStackProp<{ userId: string }>;
+};
 
-  let openImagePickerAsync = async () => {
-    let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+class HomeScreen extends React.Component<Props> {
+  render() {
+    // let [selectedImage, setSelectedImage] = React.useState(null);
 
-    if (permissionResult.granted === false) {
-      alert("permission to access camera roll is required!");
-      return;
-    }
+    // let openImagePickerAsync = async () => {
+    //   let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
 
-    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    //   if (permissionResult.granted === false) {
+    //     alert("permission to access camera roll is required!");
+    //     return;
+    //   }
 
-    if (pickerResult.cancelled === true) {
-      return;
-    }
+    //   let pickerResult = await ImagePicker.launchImageLibraryAsync();
 
-    if (Platform.OS === 'web') {
-      let remoteUri = await uploadToAnonymousFilesAsync(pickerResult.uri);
-      setSelectedImage({ localUri: pickerResult.uri, remoteUri });
-    } else {
-      setSelectedImage({ localUri: pickerResult.uri, remoteUri: null });
-    }
-  };
+    //   if (pickerResult.cancelled === true) {
+    //     return;
+    //   }
 
-  let openShareDialogAsync = async () => {
-    if (!(await Sharing.isAvailableAsync())) {
-      alert(`The image is available for sharing at: ${selectedImage.remoteUri}`);
-      return;
-    }
+    //   if (Platform.OS === 'web') {
+    //     let remoteUri = await uploadToAnonymousFilesAsync(pickerResult.uri);
+    //     setSelectedImage({ localUri: pickerResult.uri, remoteUri });
+    //   } else {
+    //     setSelectedImage({ localUri: pickerResult.uri, remoteUri: null });
+    //   }
+    // };
 
-    Sharing.shareAsync(selectedImage.remoteUri || selectedImage.localUri);
-  };
+    // let openShareDialogAsync = async () => {
+    //   if (!(await Sharing.isAvailableAsync())) {
+    //     alert(`The image is available for sharing at: ${selectedImage.remoteUri}`);
+    //     return;
+    //   }
 
-  if (selectedImage !== null) {
+    //   Sharing.shareAsync(selectedImage.remoteUri || selectedImage.localUri);
+    // };
+
+    // if (selectedImage !== null) {
+    //   return (
+    //     <View style={styles.container}>
+    //       <Image source={{ uri: selectedImage.localUri }} style={styles.thumbnail} />
+
+    //       <TouchableOpacity onPress={openShareDialogAsync} style={styles.button}>
+    //         <Text style={styles.buttonText}>Share this photo</Text>
+    //       </TouchableOpacity>
+    //     </View>
+    //   )
+    // }
+
+    // return (
+    //   <View style={styles.container}>
+    //     <Image source={{ uri: "https://i.imgur.com/TkIrScD.png" }} style={styles.logo} />
+
+    //     <Text style={styles.instructions}>
+    //       To share a photo from your phone with a friend. just press the button below!
+    //   </Text>
+
+    //     <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
+    //       <Text style={styles.buttonText}>Pick a photo</Text>
+    //     </TouchableOpacity>
+    //   </View>
+    // );
     return (
       <View style={styles.container}>
-        <Image source={{ uri: selectedImage.localUri }} style={styles.thumbnail} />
-
-        <TouchableOpacity onPress={openShareDialogAsync} style={styles.button}>
-          <Text style={styles.buttonText}>Share this photo</Text>
-        </TouchableOpacity>
+        <Text>Open up App.js to start working on your app!</Text>
+        <Text>Hello World!</Text>
+        <Button
+          title="Go to Details"
+          onPress={() => this.props.navigation.navigate('Details')}
+        />
       </View>
-    )
+    );
   }
-
-  return (
-    <View style={styles.container}>
-      <Image source={{ uri: "https://i.imgur.com/TkIrScD.png" }} style={styles.logo} />
-
-      <Text style={styles.instructions}>
-        To share a photo from your phone with a friend. just press the button below!
-      </Text>
-
-      <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
-        <Text style={styles.buttonText}>Pick a photo</Text>
-      </TouchableOpacity>
-    </View>
-  );
 }
 
 const styles = StyleSheet.create({
@@ -97,3 +115,31 @@ const styles = StyleSheet.create({
     resizeMode: "contain"
   }
 });
+
+class DetailScreen extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>Details Screen</Text>
+      </View>
+    );
+  }
+}
+
+const RootStack = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Details: DetailScreen,
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+const AppContainer = createAppContainer(RootStack);
+
+export default class App extends React.Component {
+  render() {
+    return <AppContainer />;
+  }
+}

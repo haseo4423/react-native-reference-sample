@@ -9,6 +9,10 @@ import SummaryScreen from './components/SummaryScreen';
 
 import InvoiceContainer from "./containers/InvoiceContainer";
 
+import { View, Text } from "react-native";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
+
 const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
@@ -23,7 +27,34 @@ const RootStack = createStackNavigator(
 const AppContainer = createAppContainer(RootStack);
 
 export default class App extends React.Component {
+  // ロードが終わるまでは「loading...」を表示するため、state isReadyで制御
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false
+    };
+  }
+
+  // DidMountのタイミングでフォントリソースをメモリ上に読み込み。終わったらisReadyをオン。
+  async componentDidMount() {
+    await Font.loadAsync({
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+      ...Ionicons.font
+    });
+    this.setState({ isReady: true });
+  }
+
   render() {
+    // Wait for font loading... フォントの読み込み中なら「loading...」を表示
+    if (!this.state.isReady) {
+      return (
+        <View>
+          <Text>loading...</Text>
+        </View>
+      );
+    }
+
     let globalState = new InvoiceContainer({ initialSeeding: true });
     return (
       <Provider inject={[globalState]}>

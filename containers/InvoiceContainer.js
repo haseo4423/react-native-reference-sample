@@ -2,7 +2,7 @@ import { Container } from "unstated";
 import Seeder from "../models/seeder/Seeder.js";
 
 import axios from 'axios';
-const INVOICE_API_ENDPOINT = 'http://192.168.11.17:8080/invoice.js';
+// const INVOICE_API_ENDPOINT = 'http://192.168.11.17:8080/invoice.js';
 
 export default class InvoiceContainer extends Container {
     constructor(props = {}) {
@@ -29,10 +29,10 @@ export default class InvoiceContainer extends Container {
         };
     }
 
-    getDataFromServer() {
+    getDataFromServer(endpoint) {
         this.setState({ isDataLoading: true });
         axios
-            .get(INVOICE_API_ENDPOINT, { params: {} })
+            .get(endpoint, { timeout: 3000 })
             .then(results => {
                 console.log("HTTP Request succeeded.");
                 console.log(results);

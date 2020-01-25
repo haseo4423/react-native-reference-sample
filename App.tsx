@@ -6,6 +6,7 @@ import { Provider } from "unstated";
 import HomeScreen from './components/HomeScreen';
 import InvoiceEditScreen from './components/InvoiceEditScreen';
 import SummaryScreen from './components/SummaryScreen';
+import BarcodeScannerScreen from './components/BarcodeScannerScreen';
 
 import InvoiceContainer from "./containers/InvoiceContainer";
 
@@ -18,6 +19,7 @@ const RootStack = createStackNavigator(
     Home: HomeScreen,
     InvoiceEdit: InvoiceEditScreen,
     Summary: SummaryScreen,
+    BarcodeScanner: BarcodeScannerScreen
   },
   {
     initialRouteName: 'Home',

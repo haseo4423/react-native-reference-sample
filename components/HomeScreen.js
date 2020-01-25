@@ -14,7 +14,8 @@ class HomeScreenContent extends React.Component {
     }
 
     onImportClick() {
-        this.props.globalState.getDataFromServer();
+        // this.props.globalState.getDataFromServer();
+        this.props.navigation.navigate("BarcodeScanner");
     }
 
     render() {

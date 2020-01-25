@@ -8,9 +8,28 @@ import Invoice from '../models/Invoice.js';
 import { View, Container, Content, Text, Button, Icon, List, ListItem, Left, Right } from 'native-base';
 
 class HomeScreenContent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.onImportClick = this.onImportClick.bind(this);
+    }
+
+    onImportClick() {
+        this.props.globalState.getDataFromServer();
+    }
+
     render() {
         let globalState = this.props.globalState;
         let invoiceList = <Text>No invoice</Text>;
+
+        // Wait for data loading...
+        if (globalState.state.isDataLoading) {
+            return (
+                <View>
+                    <Text>loading...</Text>
+                </View>
+            );
+        }
+
         if (globalState.state.data.invoices.length) {
             invoiceList = (
                 <List>
@@ -35,9 +54,9 @@ class HomeScreenContent extends React.Component {
                 <Content>
                     <View style={{ flexDirection: "row" }}>
                         <Left>
-                            <Button onPress={() => this.props.navigation.navigate('InvoiceEdit')}>
-                                <Icon type="FontAwesome5" name="file-invoice-dollar" />
-                                <Text style={{ paddingLeft: 0 }}>InvoiceEdit</Text>
+                            <Button light onPress={() => this.onImportClick()}>
+                                <Icon type="FontAwesome5" name="file-import" />
+                                <Text style={{ paddingLeft: 0 }}>Import</Text>
                             </Button>
                         </Left>
                         <Right>
@@ -49,6 +68,15 @@ class HomeScreenContent extends React.Component {
                     </View>
 
                     {invoiceList}
+
+                    <View style={{ flexDirection: "row" }}>
+                        <Left>
+                            <Button onPress={() => this.props.navigation.navigate('InvoiceEdit')}>
+                                <Icon type="FontAwesome5" name="file-invoice-dollar" />
+                                <Text style={{ paddingLeft: 0 }}>InvoiceEdit</Text>
+                            </Button>
+                        </Left>
+                    </View>
                 </Content>
             </Container>
         );

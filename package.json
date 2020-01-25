@@ -10,7 +10,9 @@
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.6",
     "anonymous-files": "^1.0.1",
+    "axios": "^0.19.2",
     "expo": "~36.0.0",
+    "expo-font": "~8.0.0",
     "expo-image-picker": "~8.0.1",
     "expo-sharing": "~8.0.0",
     "native-base": "^2.13.8",
@@ -24,8 +26,7 @@
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^2.0.15",
-    "unstated": "^2.1.1",
-    "expo-font": "~8.0.0"
+    "unstated": "^2.1.1"
   },
   "devDependencies": {
     "@types/react": "~16.9.0",

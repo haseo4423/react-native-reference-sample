@@ -4,6 +4,8 @@ import Seeder from "../models/seeder/Seeder.js";
 import axios from 'axios';
 // const INVOICE_API_ENDPOINT = 'http://192.168.11.17:8080/invoice.js';
 
+import { AsyncStorage } from 'react-native';
+
 export default class InvoiceContainer extends Container {
     constructor(props = {}) {
         super();
@@ -31,12 +33,13 @@ export default class InvoiceContainer extends Container {
 
     getDataFromServer(endpoint) {
         this.setState({ isDataLoading: true });
+        console.log(endpoint);
         axios
             .get(endpoint, { timeout: 3000 })
             .then(results => {
                 console.log("HTTP Request succeeded.");
                 console.log(results);
-                this.setState({ data: results.data });
+                this.setStateAndSave({ data: results.data });
                 this.setState({ isDataLoading: false });
             })
             .catch(() => {
@@ -44,4 +47,33 @@ export default class InvoiceContainer extends Container {
                 this.setState({ isDataLoading: false });
             });
     }
+
+    // Save data to the local storage, then setState.
+    setStateAndSave = async updateStates => {
+        try {
+            for (var k in updateStates) {
+                await AsyncStorage.setItem(k, JSON.stringify(updateStates[k]));
+            }
+            this.setState(updateStates);
+        } catch (error) {
+            // Error saving data
+            console.log("storage error");
+        }
+    };
+
+    // Load data from the local storage
+    load = async () => {
+        try {
+            const value = await AsyncStorage.getItem("data");
+            if (value !== null) {
+                // Data found
+                this.setState({ data: JSON.parse(value) });
+            } else {
+                this.setState({ data: this.getEmptyData() });
+            }
+        } catch (error) {
+            // Error retrieving data
+            console.log("storage error");
+        }
+    };
 }

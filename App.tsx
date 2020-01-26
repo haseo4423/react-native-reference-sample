@@ -58,6 +58,7 @@ export default class App extends React.Component {
     }
 
     let globalState = new InvoiceContainer({ initialSeeding: true });
+    globalState.load();
     return (
       <Provider inject={[globalState]}>
         <AppContainer />

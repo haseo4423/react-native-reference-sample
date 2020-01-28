@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { Provider } from "unstated";
 
 import HomeScreen from './components/HomeScreen';
@@ -26,7 +27,16 @@ const RootStack = createStackNavigator(
   }
 );
 
-const AppContainer = createAppContainer(RootStack);
+const Drawer = createDrawerNavigator(
+  {
+    Home: HomeScreen,
+    InvoiceEdit: InvoiceEditScreen,
+    Summary: SummaryScreen,
+    BarcodeScanner: BarcodeScannerScreen
+  }
+)
+
+const AppContainer = createAppContainer(Drawer);
 
 export default class App extends React.Component {
   // ロードが終わるまでは「loading...」を表示するため、state isReadyで制御

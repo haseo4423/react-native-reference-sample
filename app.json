@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ImageShare",
-    "slug": "ImageShare",
+    "name": "ReactNativeReferenceSample",
+    "slug": "reactnativereferencesample",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -24,7 +24,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
-    }
+      "supportsTablet": true,
+      "bundleIdentifier": "jp.haseo5070.reactnativereferencesample"
+    },
+    "android": {
+      "package": "jp.haseo5070.reactnativereferencesample"
+    },
+    "description": "Sample for reference ReactNativeAPIs."
   }
 }

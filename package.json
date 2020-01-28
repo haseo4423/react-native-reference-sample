@@ -12,6 +12,7 @@
     "anonymous-files": "^1.0.1",
     "axios": "^0.19.2",
     "expo": "~36.0.2",
+    "expo-barcode-scanner": "~8.0.0",
     "expo-font": "~8.0.0",
     "expo-image-picker": "~8.0.2",
     "expo-sharing": "~8.0.0",
@@ -26,8 +27,7 @@
     "react-native-web": "~0.12.0",
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^2.0.16",
-    "unstated": "^2.1.1",
-    "expo-barcode-scanner": "~8.0.0"
+    "unstated": "^2.1.1"
   },
   "devDependencies": {
     "@types/react": "~16.9.19",

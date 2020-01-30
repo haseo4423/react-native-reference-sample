@@ -5,7 +5,8 @@ import styles from '../styles.js';
 import InvoiceContainer from "../containers/InvoiceContainer";
 import Invoice from '../models/Invoice.js';
 
-import { View, Container, Content, Text, Button, Icon, List, ListItem, Left, Right } from 'native-base';
+import { View, Container, Content, Text, Button, Icon, List, ListItem, Left, Right, Header, Body, Title } from 'native-base';
+import { StatusBar } from "react-native";
 
 class HomeScreenContent extends React.Component {
     constructor(props) {
@@ -52,6 +53,17 @@ class HomeScreenContent extends React.Component {
 
         return (
             <Container>
+                <Header>
+                    <Left>
+                        <Button transparent onPress={() => this.props.navigation.openDrawer()}>
+                            <Icon name="menu" />
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title>HomeScreen</Title>
+                    </Body>
+                    <Right />
+                </Header>
                 <Content>
                     <View style={{ flexDirection: "row" }}>
                         <Left>

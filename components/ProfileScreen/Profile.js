@@ -3,20 +3,6 @@ import { AppRegistry, Alert } from "react-native";
 import { Container, Header, Left, Body, Title, Card, CardItem, Content, Right, Icon, Button, Text } from "native-base";
 import EditScreenOne from "./EditScreenOne.js";
 export default class Profile extends React.Component {
-    static navigationOptions = ({ navigation }) => ({
-        header: () =>
-            <Header>
-                <Left>
-                    <Button transparent onPress={() => navigation.openDrawer()}>
-                        <Icon name="menu" />
-                    </Button>
-                </Left>
-                <Body>
-                    <Title>Profile</Title>
-                </Body>
-                <Right />
-            </Header>
-    });
     componentDidMount() {
         Alert.alert("No Users Found", "Oops, Looks like you are not signed in");
     }
@@ -43,3 +29,17 @@ export default class Profile extends React.Component {
         );
     }
 }
+Profile.navigationOptions = ({ navigation }) => ({
+    header: () =>
+        <Header>
+            <Left>
+                <Button transparent onPress={() => navigation.openDrawer()}>
+                    <Icon name="menu" />
+                </Button>
+            </Left>
+            <Body>
+                <Title>Profile</Title>
+            </Body>
+            <Right />
+        </Header>
+});

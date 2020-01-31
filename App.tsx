@@ -8,6 +8,7 @@ import HomeScreen from './components/HomeScreen';
 import InvoiceEditScreen from './components/InvoiceEditScreen';
 import SummaryScreen from './components/SummaryScreen';
 import BarcodeScannerScreen from './components/BarcodeScannerScreen';
+import ProfileScreen from './components/ProfileScreen/index';
 
 import InvoiceContainer from "./containers/InvoiceContainer";
 
@@ -15,24 +16,25 @@ import { View, Text } from "react-native";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 
-const RootStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-    InvoiceEdit: InvoiceEditScreen,
-    Summary: SummaryScreen,
-    BarcodeScanner: BarcodeScannerScreen
-  },
-  {
-    initialRouteName: 'Home',
-  }
-);
+// const RootStack = createStackNavigator(
+//   {
+//     Home: HomeScreen,
+//     InvoiceEdit: InvoiceEditScreen,
+//     Summary: SummaryScreen,
+//     BarcodeScanner: BarcodeScannerScreen
+//   },
+//   {
+//     initialRouteName: 'Home',
+//   }
+// );
 
 const Drawer = createDrawerNavigator(
   {
     Home: HomeScreen,
     InvoiceEdit: InvoiceEditScreen,
     Summary: SummaryScreen,
-    BarcodeScanner: BarcodeScannerScreen
+    BarcodeScanner: BarcodeScannerScreen,
+    Profile: ProfileScreen
   }
 )
 

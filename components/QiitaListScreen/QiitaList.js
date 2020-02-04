@@ -1,7 +1,7 @@
 import React from "react";
 import { Subscribe } from "unstated";
 import { AppRegistry } from "react-native";
-import { Container, Header, Left, Body, Title, Content, Right, Icon, Button, Text, List, ListItem, Thumbnail, Toast } from "native-base";
+import { Container, Header, Left, Body, Title, Content, Right, Icon, Button, Text, List, ListItem, Thumbnail, Toast, Spinner } from "native-base";
 import QiitaItemContainer from "../../containers/QiitaItem";
 import QiitaItem from '../../models/QiitaItem.js';
 import { Linking } from 'expo';
@@ -45,7 +45,7 @@ class QiitaListContent extends React.Component {
             return (
                 <Container>
                     <Content padder>
-                        <Text>loading...</Text>
+                        <Spinner />
                     </Content>
                 </Container>
             );

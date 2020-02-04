@@ -1,41 +1,22 @@
 import * as React from 'react';
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { Provider } from "unstated";
 
 import HomeScreen from './components/HomeScreen';
-import InvoiceEditScreen from './components/InvoiceEditScreen';
-import SummaryScreen from './components/SummaryScreen';
-import BarcodeScannerScreen from './components/BarcodeScannerScreen';
 import ProfileScreen from './components/ProfileScreen/index';
 import QiitaListScreen from './components/QiitaListScreen/index';
 
 import InvoiceContainer from "./containers/InvoiceContainer";
 import QiitaItemContainer from "./containers/QiitaItem";
 
-import { View, Text } from "react-native";
+import { Container, Header, Content, Spinner } from 'native-base';
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
-
-// const RootStack = createStackNavigator(
-//   {
-//     Home: HomeScreen,
-//     InvoiceEdit: InvoiceEditScreen,
-//     Summary: SummaryScreen,
-//     BarcodeScanner: BarcodeScannerScreen
-//   },
-//   {
-//     initialRouteName: 'Home',
-//   }
-// );
 
 const Drawer = createDrawerNavigator(
   {
     Home: HomeScreen,
-    InvoiceEdit: InvoiceEditScreen,
-    Summary: SummaryScreen,
-    BarcodeScanner: BarcodeScannerScreen,
     Profile: ProfileScreen,
     QiitaList: QiitaListScreen
   }
@@ -66,9 +47,12 @@ export default class App extends React.Component {
     // Wait for font loading... フォントの読み込み中なら「loading...」を表示
     if (!this.state.isReady) {
       return (
-        <View>
-          <Text>loading...</Text>
-        </View>
+        <Container>
+          <Header />
+          <Content>
+            <Spinner />
+          </Content>
+        </Container>
       );
     }
 

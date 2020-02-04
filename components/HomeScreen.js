@@ -26,9 +26,11 @@ class HomeScreenContent extends React.Component {
         // Wait for data loading...
         if (globalState.state.isDataLoading) {
             return (
-                <View>
-                    <Text>loading...</Text>
-                </View>
+                <Container>
+                    <Content padder>
+                        <Spinner />
+                    </Content>
+                </Container>
             );
         }
 

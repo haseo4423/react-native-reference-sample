@@ -9,8 +9,10 @@ import InvoiceEditScreen from './components/InvoiceEditScreen';
 import SummaryScreen from './components/SummaryScreen';
 import BarcodeScannerScreen from './components/BarcodeScannerScreen';
 import ProfileScreen from './components/ProfileScreen/index';
+import QiitaListScreen from './components/QiitaListScreen/index';
 
 import InvoiceContainer from "./containers/InvoiceContainer";
+import QiitaItemContainer from "./containers/QiitaItem";
 
 import { View, Text } from "react-native";
 import * as Font from "expo-font";
@@ -34,7 +36,8 @@ const Drawer = createDrawerNavigator(
     InvoiceEdit: InvoiceEditScreen,
     Summary: SummaryScreen,
     BarcodeScanner: BarcodeScannerScreen,
-    Profile: ProfileScreen
+    Profile: ProfileScreen,
+    QiitaList: QiitaListScreen
   }
 )
 
@@ -70,9 +73,11 @@ export default class App extends React.Component {
     }
 
     let globalState = new InvoiceContainer({ initialSeeding: true });
+    let qiitaItemState = new QiitaItemContainer();
     globalState.load();
+    qiitaItemState.load();
     return (
-      <Provider inject={[globalState]}>
+      <Provider inject={[globalState, qiitaItemState]}>
         <AppContainer />
       </Provider>
     );

@@ -92,8 +92,8 @@ class HomeScreenContent extends React.Component {
                             </Button>
                         </Left>
                     </View>
-                </Content>
-            </Container>
+                </Content >
+            </Container >
         );
     }
 }

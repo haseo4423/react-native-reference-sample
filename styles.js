@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
 
 export default StyleSheet.create({
     container: {
@@ -6,6 +7,7 @@ export default StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingTop: Constants.statusBarHeight
     },
     modal: {
         flex: 1,
